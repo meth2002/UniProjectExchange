@@ -9,6 +9,7 @@ namespace UniProjectExchange {
     using namespace System::Data;
     using namespace System::Drawing;
     using namespace System::Data::SqlClient;
+    using namespace System::IO;
 
     public ref class ProjectDetailsForm : public System::Windows::Forms::Form
     {

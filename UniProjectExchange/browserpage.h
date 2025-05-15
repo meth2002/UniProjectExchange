@@ -1,4 +1,5 @@
 #pragma once
+#include "projectdetailspage.h"
 
 namespace UniProjectExchange {
 
@@ -9,6 +10,7 @@ namespace UniProjectExchange {
     using namespace System::Data;
     using namespace System::Drawing;
     using namespace System::Data::SqlClient;
+    using namespace System::IO;
 
     public ref class BrowseProjectsForm : public System::Windows::Forms::Form
     {
@@ -277,18 +279,8 @@ namespace UniProjectExchange {
     private: System::Void ApplyFilter_Click(System::Object^ sender, System::EventArgs^ e) {
         String^ filter = cmbFilter->SelectedItem != nullptr ? cmbFilter->SelectedItem->ToString() : "All Categories";
 
-        if (filter == "All Categories") {
-            foreach(ListViewItem ^ item in lvProjects->Items) {
-                item->Hidden = false;
-            }
-        }
-        else {
-            foreach(ListViewItem ^ item in lvProjects->Items) {
-                item->Hidden = (item->SubItems[2]->Text != filter);
-            }
-        }
     }
     private: System::Void BrowseProjectsForm_Load(System::Object^ sender, System::EventArgs^ e) {
     }
 };
-}
+;}
