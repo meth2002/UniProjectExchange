@@ -1,0 +1,2 @@
+#include "projectdetailspage.h"
+
