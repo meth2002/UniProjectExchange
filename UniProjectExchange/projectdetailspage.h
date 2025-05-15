@@ -38,7 +38,7 @@ namespace UniProjectExchange {
     private: System::Windows::Forms::Label^ lblPrice;
     private: System::Windows::Forms::Label^ lblPriceValue;
 
-
+    private: System::Windows::Forms::Label^ lblCategoryValue;
     private: System::Windows::Forms::Label^ lblComponents;
     private: System::Windows::Forms::ListBox^ lbComponents;
     private: System::Windows::Forms::Button^ btnBuy;

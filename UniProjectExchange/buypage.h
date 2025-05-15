@@ -31,6 +31,7 @@ namespace UniProjectExchange {
 	private: System::Windows::Forms::Label^ label1;
 
 	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::ComboBox^ cmbSymbol;
 
 	private: System::Windows::Forms::TextBox^ txtQuantity;
 	private: System::Windows::Forms::Button^ btnBuy;
