@@ -1,4 +1,5 @@
 #pragma once
+#include "addcomponentpage.h"
 
 namespace UniProjectExchange {
 

@@ -1,4 +1,6 @@
 #pragma once
+#include "buypage.h"
+#include "sellpage1.h"
 
 namespace UniProjectExchange {
 
@@ -32,6 +34,8 @@ namespace UniProjectExchange {
 	private: System::Windows::Forms::Button^ btnLogout;
 	private: System::Windows::Forms::Label^ lblBalance;
 	private: System::Windows::Forms::Label^ lblBalanceValue;
+	private: System::Windows::Forms::DataGridView^ dataGridView1;
+
 
 
 
@@ -155,7 +159,7 @@ namespace UniProjectExchange {
 
 	private: System::Void SellButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		// Create and show the sell form
-		sellForm^ sell = gcnew sellForm();
+		SellProjectForm^ sell = gcnew SellProjectForm();
 		sell->ShowDialog();
 		// Refresh data after sell operation if needed
 		RefreshDashboardData();

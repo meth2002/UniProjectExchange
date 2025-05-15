@@ -112,6 +112,7 @@ namespace UniProjectExchange {
             this->txtDescription->Size = System::Drawing::Size(400, 100);
             this->txtDescription->TabIndex = 3;
             this->txtDescription->Text = L"";
+            this->txtDescription->TextChanged += gcnew System::EventHandler(this, &ProjectDetailsForm::txtDescription_TextChanged);
             // 
             // lblPrice
             // 
@@ -394,6 +395,8 @@ namespace UniProjectExchange {
     private: System::Void lblPriceValue_Click(System::Object^ sender, System::EventArgs^ e) {
     }
 private: System::Void ProjectDetailsForm_Load(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void txtDescription_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

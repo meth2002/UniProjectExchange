@@ -56,5 +56,8 @@
     <ClInclude Include="projectdetailspage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="addcomponentpage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
