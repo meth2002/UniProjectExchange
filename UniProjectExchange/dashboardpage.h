@@ -154,7 +154,7 @@ namespace UniProjectExchange {
 		buyForm^ buy = gcnew buyForm();
 		buy->ShowDialog();
 		// Refresh data after buy operation if needed
-		RefreshDashboardData();
+		//RefreshDashboardData();
 	}
 
 	private: System::Void SellButton_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -162,7 +162,7 @@ namespace UniProjectExchange {
 		SellProjectForm^ sell = gcnew SellProjectForm();
 		sell->ShowDialog();
 		// Refresh data after sell operation if needed
-		RefreshDashboardData();
+		//RefreshDashboardData();
 	}
 
 	private: System::Void LogoutButton_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -173,7 +173,7 @@ namespace UniProjectExchange {
 	private: System::Void Dashboard_Load(System::Object^ sender, System::EventArgs^ e) {
 		// Load user data when form loads
 		LoadUserData();
-		RefreshDashboardData();
+		//RefreshDashboardData();
 	}
 
 	private: void LoadUserData() {

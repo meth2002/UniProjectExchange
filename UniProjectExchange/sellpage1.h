@@ -18,7 +18,7 @@ namespace UniProjectExchange {
         SellProjectForm(void)
         {
             InitializeComponent();
-            connectionString = "Data Source=localhost\\sqlexpress;Initial Catalog=UniProjectExchange;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
+            connectionString = DatabaseConfig::ConnectionString;
         }
 
     protected:
@@ -312,10 +312,10 @@ namespace UniProjectExchange {
             return;
         }
 
-        if (cmbCategory->SelectedIndex == -1) {
-            MessageBox::Show("Please select a category", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-            return;
-        }
+        //if (cmbCategory->SelectedIndex == -1) {
+        //    MessageBox::Show("Please select a category", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        //    return;
+        //}
 
         // Save project to database
         if (SaveProjectToDatabase()) {
@@ -340,13 +340,13 @@ namespace UniProjectExchange {
             try {
                 // 1. Save the main project
                 command->CommandText = "INSERT INTO Projects (Title, Description, Price, Category, SellerId, ImagePath, CreatedDate) "
-                    "VALUES (@Title, @Description, @Price, @Category, @SellerId, @ImagePath, GETDATE()); SELECT SCOPE_IDENTITY();";
+                    "VALUES (@Title, @Description, @Price, @SellerId, @ImagePath, GETDATE()); SELECT SCOPE_IDENTITY();";
                 command->Parameters->AddWithValue("@Title", txtProjectTitle->Text);
                 command->Parameters->AddWithValue("@Description", txtDescription->Text);
                 command->Parameters->AddWithValue("@Price", txtPrice->Text);
-                command->Parameters->AddWithValue("@Category", cmbCategory->SelectedItem->ToString());
-                command->Parameters->AddWithValue("@SellerId", GetCurrentUserId());
-                command->Parameters->AddWithValue("@ImagePath", imagePath != nullptr ? imagePath : DBNull::Value);
+                //command->Parameters->AddWithValue("@Category", cmbCategory->SelectedItem->ToString());
+                command->Parameters->AddWithValue("@SellerId", GetCurrentUserId()); command->Parameters->AddWithValue("@ImagePath", imagePath != nullptr ? imagePath : static_cast<Object^>(DBNull::Value));
+
 
                 int projectId = Convert::ToInt32(command->ExecuteScalar());
 

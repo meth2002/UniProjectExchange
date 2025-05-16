@@ -143,6 +143,7 @@
     <ClInclude Include="dashboardpage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="DatabaseConfig.h" />
     <ClInclude Include="loginpage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
