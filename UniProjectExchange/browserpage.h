@@ -121,7 +121,7 @@ namespace UniProjectExchange {
             // imageList1
             // 
             this->imageList1->ColorDepth = System::Windows::Forms::ColorDepth::Depth8Bit;
-            this->imageList1->ImageSize = System::Drawing::Size(16, 16);
+            this->imageList1->ImageSize = System::Drawing::Size(64, 64);
             this->imageList1->TransparentColor = System::Drawing::Color::Transparent;
             // 
             // btnViewDetails
@@ -199,6 +199,7 @@ namespace UniProjectExchange {
 
     private: void LoadProjects() {
         lvProjects->Items->Clear();
+        imageList1->Images->Clear(); // Clear previous images
 
         SqlConnection^ connection = gcnew SqlConnection(connectionString);
         SqlCommand^ command = gcnew SqlCommand("SELECT Id, Title, Price, Category, ImagePath FROM Projects", connection);
@@ -207,45 +208,56 @@ namespace UniProjectExchange {
             connection->Open();
             SqlDataReader^ reader = command->ExecuteReader();
 
+            int imageIndex = 0;
+
             while (reader->Read()) {
-                String^ id = reader["Id"]->ToString();
                 String^ title = reader["Title"]->ToString();
                 String^ price = "$" + Convert::ToDouble(reader["Price"]).ToString("N2");
                 String^ category = reader["Category"]->ToString();
                 String^ imagePath = reader["ImagePath"] != DBNull::Value ? reader["ImagePath"]->ToString() : "";
 
-                ListViewItem^ item = gcnew ListViewItem(title);
-                item->SubItems->Add(price);
-                item->SubItems->Add(category);
-                item->Tag = id; // Store project ID in Tag
-
-                // Load image if available
+                // Load image
+                Image^ image = nullptr;
                 if (!String::IsNullOrEmpty(imagePath) && File::Exists(imagePath)) {
                     try {
-                        Image^ img = Image::FromFile(imagePath);
-                        imageList1->Images->Add(img);
-                        item->ImageIndex = imageList1->Images->Count - 1;
+                        image = Image::FromFile(imagePath);
                     }
                     catch (...) {
-                        item->ImageIndex = 0; // Use default image
+                        image = nullptr; // If image can't be loaded, skip
                     }
                 }
-                else {
-                    item->ImageIndex = 0; // Use default image
+
+                if (image != nullptr) {
+                    imageList1->Images->Add(image);
                 }
+                else {
+                    // Add a default or empty image if none exists
+                    Bitmap^ placeholder = gcnew Bitmap(16, 16);
+                    Graphics^ g = Graphics::FromImage(placeholder);
+                    g->Clear(Color::Gray);
+                    imageList1->Images->Add(placeholder);
+                }
+
+                // Create ListViewItem with subitems
+                ListViewItem^ item = gcnew ListViewItem();
+                item->ImageIndex = imageIndex++;
+                item->SubItems->Add(title);
+                item->SubItems->Add(price);
+                item->SubItems->Add(category);
 
                 lvProjects->Items->Add(item);
             }
+
             reader->Close();
         }
         catch (Exception^ ex) {
-            MessageBox::Show("Error loading projects: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+            MessageBox::Show("Error loading projects: " + ex->Message);
         }
         finally {
-            if (connection->State == ConnectionState::Open)
-                connection->Close();
+            connection->Close();
         }
     }
+
 
     private: System::Void ProjectSelected(System::Object^ sender, System::EventArgs^ e) {
         btnViewDetails->Enabled = lvProjects->SelectedItems->Count > 0;

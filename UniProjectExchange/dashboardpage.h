@@ -1,6 +1,7 @@
 #pragma once
 #include "buypage.h"
 #include "sellpage1.h"
+#include "browserpage.h"
 
 namespace UniProjectExchange {
 
@@ -151,18 +152,14 @@ namespace UniProjectExchange {
 
 	private: System::Void BuyButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		// Create and show the buy form
-		buyForm^ buy = gcnew buyForm();
+		BrowseProjectsForm^ buy = gcnew BrowseProjectsForm();
 		buy->ShowDialog();
-		// Refresh data after buy operation if needed
-		//RefreshDashboardData();
 	}
 
 	private: System::Void SellButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		// Create and show the sell form
 		SellProjectForm^ sell = gcnew SellProjectForm();
 		sell->ShowDialog();
-		// Refresh data after sell operation if needed
-		//RefreshDashboardData();
 	}
 
 	private: System::Void LogoutButton_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -171,14 +168,10 @@ namespace UniProjectExchange {
 	}
 
 	private: System::Void Dashboard_Load(System::Object^ sender, System::EventArgs^ e) {
-		// Load user data when form loads
 		LoadUserData();
-		//RefreshDashboardData();
 	}
 
 	private: void LoadUserData() {
-		// Load user-specific data (name, balance, etc.)
-		// This would typically come from your database
 		lblWelcome->Text = "Welcome, " + GetCurrentUserName() + "!";
 		lblBalanceValue->Text = "$" + GetCurrentUserBalance().ToString("N2");
 	}

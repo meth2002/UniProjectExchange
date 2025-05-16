@@ -1,5 +1,5 @@
 #pragma once
-#include "projectdetailspage.h"
+
 namespace UniProjectExchange {
 
 	using namespace System;
@@ -58,6 +58,7 @@ namespace UniProjectExchange {
 			this->lblPrice = (gcnew System::Windows::Forms::Label());
 			this->lblTotal = (gcnew System::Windows::Forms::Label());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
+			this->cmbSymbol = (gcnew System::Windows::Forms::ComboBox());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -145,12 +146,22 @@ namespace UniProjectExchange {
 			this->timer1->Interval = 5000;
 			this->timer1->Tick += gcnew System::EventHandler(this, &buyForm::UpdatePrices);
 			// 
+			// cmbSymbol
+			// 
+			this->cmbSymbol->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->cmbSymbol->FormattingEnabled = true;
+			this->cmbSymbol->Location = System::Drawing::Point(658, 160);
+			this->cmbSymbol->Name = L"cmbSymbol";
+			this->cmbSymbol->Size = System::Drawing::Size(282, 24);
+			this->cmbSymbol->TabIndex = 3;
+			this->cmbSymbol->SelectedIndexChanged += gcnew System::EventHandler(this, &buyForm::SymbolChanged);
+			// 
 			// buyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ActiveCaption;
-			this->ClientSize = System::Drawing::Size(952, 513);
+			this->ClientSize = System::Drawing::Size(961, 513);
 			this->Controls->Add(this->lblTotal);
 			this->Controls->Add(this->lblPrice);
 			this->Controls->Add(this->btnCancel);
@@ -158,6 +169,7 @@ namespace UniProjectExchange {
 			this->Controls->Add(this->txtQuantity);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label1);
+			this->Controls->Add(this->cmbSymbol);
 			this->Name = L"buyForm";
 			this->Text = L"Buy Stocks";
 			this->Load += gcnew System::EventHandler(this, &buyForm::Form_Load);
