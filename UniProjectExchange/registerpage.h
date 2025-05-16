@@ -1,5 +1,6 @@
 #pragma once
-
+#include "DatabaseConfig.h"
+#include "loginpage.h"
 namespace UniProjectExchange {
 
 	using namespace System;
@@ -16,7 +17,7 @@ namespace UniProjectExchange {
 		registerpage(void)
 		{
 			InitializeComponent();
-			connectionString = "Data Source=localhost\\sqlexpress;Initial Catalog=UniProjectExchange;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
+			connectionString = DatabaseConfig::ConnectionString;
 		}
 
 	protected:
@@ -61,6 +62,7 @@ namespace UniProjectExchange {
 			this->label1->Size = System::Drawing::Size(41, 16);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Email";
+			this->label1->Click += gcnew System::EventHandler(this, &registerpage::label1_Click);
 			// 
 			// label2
 			// 
@@ -86,6 +88,7 @@ namespace UniProjectExchange {
 			this->txtEmail->Name = L"txtEmail";
 			this->txtEmail->Size = System::Drawing::Size(200, 22);
 			this->txtEmail->TabIndex = 3;
+			this->txtEmail->TextChanged += gcnew System::EventHandler(this, &registerpage::txtEmail_TextChanged);
 			// 
 			// txtPassword
 			// 
@@ -179,7 +182,11 @@ namespace UniProjectExchange {
 			if (RegisterUser(email, password)) {
 				MessageBox::Show("Registration successful! You can now login", "Success",
 					MessageBoxButtons::OK, MessageBoxIcon::Information);
-				this->Close();
+				
+				loginpage^ loginPage = gcnew loginpage();
+				loginPage->Show();
+			
+				//this->Close();
 			}
 			else {
 				MessageBox::Show("Registration failed", "Error",
@@ -249,5 +256,9 @@ namespace UniProjectExchange {
 	}
 	private: System::Void registerpage_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
+private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void txtEmail_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
