@@ -1,6 +1,6 @@
 #pragma once
 #include "projectdetailspage.h"
-
+#include "DatabaseConfig.h"
 namespace UniProjectExchange {
 
     using namespace System;
@@ -18,7 +18,7 @@ namespace UniProjectExchange {
         BrowseProjectsForm(void)
         {
             InitializeComponent();
-            connectionString = "Data Source=localhost\\sqlexpress;Initial Catalog=UniProjectExchange;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
+            connectionString = DatabaseConfig::ConnectionString;
             LoadProjects();
         }
 

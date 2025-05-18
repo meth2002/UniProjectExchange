@@ -1,5 +1,6 @@
 #pragma once
-
+#include "DatabaseConfig.h"
+#include "dashboardpage.h"
 namespace UniProjectExchange {
 
 	using namespace System;
@@ -18,7 +19,7 @@ namespace UniProjectExchange {
 		{
 			InitializeComponent();
 
-			connectionString = "Data Source=localhost\sqlexpress;Initial Catalog=UniProjectExchange;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
+			connectionString = DatabaseConfig::ConnectionString;
 		}
 
 	protected:
@@ -84,6 +85,7 @@ namespace UniProjectExchange {
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(100, 22);
 			this->textBox2->TabIndex = 3;
+			this->textBox2->Text = L"methpani@";
 			this->textBox2->TextChanged += gcnew System::EventHandler(this, &loginpage::textBox2_TextChanged);
 			// 
 			// button1
@@ -145,6 +147,10 @@ namespace UniProjectExchange {
 			if (VerifyCredentials(email, password)) {
 				MessageBox::Show("Login successful!", "Success",
 					MessageBoxButtons::OK, MessageBoxIcon::Information);
+				
+					dashboard^ dashboardpage = gcnew dashboard();
+				dashboardpage->Show();
+
 				// Proceed to main application or next form
 			}
 			else {

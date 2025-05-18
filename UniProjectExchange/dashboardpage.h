@@ -1,5 +1,5 @@
 #pragma once
-#include "buypage.h"
+#include "browserpage.h"
 #include "sellpage1.h"
 
 namespace UniProjectExchange {
@@ -151,10 +151,10 @@ namespace UniProjectExchange {
 
 	private: System::Void BuyButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		// Create and show the buy form
-		buyForm^ buy = gcnew buyForm();
+		BrowseProjectsForm^ buy = gcnew BrowseProjectsForm();
 		buy->ShowDialog();
 		// Refresh data after buy operation if needed
-		RefreshDashboardData();
+		//RefreshDashboardData();
 	}
 
 	private: System::Void SellButton_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -162,7 +162,7 @@ namespace UniProjectExchange {
 		SellProjectForm^ sell = gcnew SellProjectForm();
 		sell->ShowDialog();
 		// Refresh data after sell operation if needed
-		RefreshDashboardData();
+		//RefreshDashboardData();
 	}
 
 	private: System::Void LogoutButton_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -173,7 +173,7 @@ namespace UniProjectExchange {
 	private: System::Void Dashboard_Load(System::Object^ sender, System::EventArgs^ e) {
 		// Load user data when form loads
 		LoadUserData();
-		RefreshDashboardData();
+		//RefreshDashboardData();
 	}
 
 	private: void LoadUserData() {
