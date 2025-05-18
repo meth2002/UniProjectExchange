@@ -40,7 +40,7 @@ namespace UniProjectExchange {
 	private: System::Windows::Forms::Label^ lblTotal;
 	private: System::Windows::Forms::Timer^ timer1;
 	private: String^ connectionString;
-	private: System::Windows::Forms::PictureBox^ pictureBox1;
+
 	private: System::ComponentModel::IContainer^ components;
 
 	private:
@@ -50,7 +50,6 @@ namespace UniProjectExchange {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(buyForm::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->txtQuantity = (gcnew System::Windows::Forms::TextBox());
@@ -59,8 +58,7 @@ namespace UniProjectExchange {
 			this->lblPrice = (gcnew System::Windows::Forms::Label());
 			this->lblTotal = (gcnew System::Windows::Forms::Label());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			this->cmbSymbol = (gcnew System::Windows::Forms::ComboBox());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -148,22 +146,22 @@ namespace UniProjectExchange {
 			this->timer1->Interval = 5000;
 			this->timer1->Tick += gcnew System::EventHandler(this, &buyForm::UpdatePrices);
 			// 
-			// pictureBox1
+			// cmbSymbol
 			// 
-			this->pictureBox1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.BackgroundImage")));
-			this->pictureBox1->Location = System::Drawing::Point(21, 37);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(438, 442);
-			this->pictureBox1->TabIndex = 9;
-			this->pictureBox1->TabStop = false;
+			this->cmbSymbol->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->cmbSymbol->FormattingEnabled = true;
+			this->cmbSymbol->Location = System::Drawing::Point(658, 160);
+			this->cmbSymbol->Name = L"cmbSymbol";
+			this->cmbSymbol->Size = System::Drawing::Size(282, 24);
+			this->cmbSymbol->TabIndex = 3;
+			this->cmbSymbol->SelectedIndexChanged += gcnew System::EventHandler(this, &buyForm::SymbolChanged);
 			// 
 			// buyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ActiveCaption;
-			this->ClientSize = System::Drawing::Size(952, 513);
-			this->Controls->Add(this->pictureBox1);
+			this->ClientSize = System::Drawing::Size(961, 513);
 			this->Controls->Add(this->lblTotal);
 			this->Controls->Add(this->lblPrice);
 			this->Controls->Add(this->btnCancel);
@@ -171,10 +169,10 @@ namespace UniProjectExchange {
 			this->Controls->Add(this->txtQuantity);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label1);
+			this->Controls->Add(this->cmbSymbol);
 			this->Name = L"buyForm";
 			this->Text = L"Buy Stocks";
 			this->Load += gcnew System::EventHandler(this, &buyForm::Form_Load);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "browserpage.h"
 #include "sellpage1.h"
+#include "browserpage.h"
 
 namespace UniProjectExchange {
 
@@ -171,14 +172,11 @@ namespace UniProjectExchange {
 	}
 
 	private: System::Void Dashboard_Load(System::Object^ sender, System::EventArgs^ e) {
-		// Load user data when form loads
 		LoadUserData();
 		//RefreshDashboardData();
 	}
 
 	private: void LoadUserData() {
-		// Load user-specific data (name, balance, etc.)
-		// This would typically come from your database
 		lblWelcome->Text = "Welcome, " + GetCurrentUserName() + "!";
 		lblBalanceValue->Text = "$" + GetCurrentUserBalance().ToString("N2");
 	}

@@ -152,7 +152,7 @@ namespace UniProjectExchange {
 				dashboardpage->Show();
 
 				// Proceed to main application or next form
-			}
+			} 
 			else {
 				MessageBox::Show("Invalid email or password", "Login Failed",
 					MessageBoxButtons::OK, MessageBoxIcon::Error);

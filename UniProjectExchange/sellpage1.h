@@ -340,8 +340,8 @@ namespace UniProjectExchange {
 
             try {
                 // 1. Save the main project
-                command->CommandText = "INSERT INTO Projects (Title, Description, Price) "
-                    "VALUES (@Title, @Description, @Price); SELECT SCOPE_IDENTITY();";
+                command->CommandText = "INSERT INTO Projects (Title, Description, Price, Category, SellerId, ImagePath, CreatedDate) "
+                    "VALUES (@Title, @Description, @Price, @Category, @SellerId, @ImagePath, GETDATE()); SELECT SCOPE_IDENTITY();";
                 command->Parameters->AddWithValue("@Title", txtProjectTitle->Text);
                 command->Parameters->AddWithValue("@Description", txtDescription->Text);
                 command->Parameters->AddWithValue("@Price", txtPrice->Text);
