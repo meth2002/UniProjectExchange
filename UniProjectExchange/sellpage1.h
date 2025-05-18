@@ -1,6 +1,6 @@
 #pragma once
 #include "addcomponentpage.h"
-
+#include "DatabaseConfig.h" 
 
 namespace UniProjectExchange {
 
@@ -48,6 +48,7 @@ namespace UniProjectExchange {
     private: System::Windows::Forms::Button^ btnSubmit;
     private: System::Windows::Forms::Button^ btnCancel;
     private: String^ connectionString;
+    private: String^ base64Image;
     private: String^ imagePath;
 
     private:
@@ -292,6 +293,8 @@ namespace UniProjectExchange {
         if (openFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
             imagePath = openFileDialog->FileName;
             picProjectImage->Image = Image::FromFile(imagePath);
+            array<Byte>^ imageBytes = File::ReadAllBytes(imagePath);
+            base64Image = Convert::ToBase64String(imageBytes);
         }
     }
 
@@ -340,13 +343,14 @@ namespace UniProjectExchange {
 
             try {
                 // 1. Save the main project
-                command->CommandText = "INSERT INTO Projects (Title, Description, Price, Category, SellerId, ImagePath, CreatedDate) "
-                    "VALUES (@Title, @Description, @Price, @Category, @SellerId, @ImagePath, GETDATE()); SELECT SCOPE_IDENTITY();";
+                command->CommandText = "INSERT INTO Projects (Title, Description, Price, ImagePath) "
+                    "VALUES (@Title, @Description, @Price, @ImagePath); SELECT SCOPE_IDENTITY();";
                 command->Parameters->AddWithValue("@Title", txtProjectTitle->Text);
                 command->Parameters->AddWithValue("@Description", txtDescription->Text);
                 command->Parameters->AddWithValue("@Price", txtPrice->Text);
                 //command->Parameters->AddWithValue("@Category", cmbCategory->SelectedItem->ToString());
-               // command->Parameters->AddWithValue("@SellerId", GetCurrentUserId()); command->Parameters->AddWithValue("@ImagePath", imagePath != nullptr ? imagePath : static_cast<Object^>(DBNull::Value));
+               // command->Parameters->AddWithValue("@SellerId", GetCurrentUserId()); 
+                command->Parameters->AddWithValue("@ImagePath", base64Image != nullptr ? base64Image : static_cast<Object^>(DBNull::Value));
 
 
                 int projectId = Convert::ToInt32(command->ExecuteScalar());

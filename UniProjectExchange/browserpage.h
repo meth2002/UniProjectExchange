@@ -1,6 +1,7 @@
 #pragma once
 #include "projectdetailspage.h"
 #include "DatabaseConfig.h"
+
 namespace UniProjectExchange {
 
     using namespace System;
@@ -11,6 +12,7 @@ namespace UniProjectExchange {
     using namespace System::Drawing;
     using namespace System::Data::SqlClient;
     using namespace System::IO;
+    using namespace System::Diagnostics;
 
     public ref class BrowseProjectsForm : public System::Windows::Forms::Form
     {
@@ -35,7 +37,7 @@ namespace UniProjectExchange {
     private: System::Windows::Forms::ColumnHeader^ colImage;
     private: System::Windows::Forms::ColumnHeader^ colTitle;
     private: System::Windows::Forms::ColumnHeader^ colPrice;
-    private: System::Windows::Forms::ColumnHeader^ colCategory;
+    
     private: System::Windows::Forms::ImageList^ imageList1;
     private: System::Windows::Forms::Button^ btnViewDetails;
     private: System::Windows::Forms::Button^ btnRefresh;
@@ -57,7 +59,7 @@ namespace UniProjectExchange {
             this->colImage = (gcnew System::Windows::Forms::ColumnHeader());
             this->colTitle = (gcnew System::Windows::Forms::ColumnHeader());
             this->colPrice = (gcnew System::Windows::Forms::ColumnHeader());
-            this->colCategory = (gcnew System::Windows::Forms::ColumnHeader());
+           
             this->imageList1 = (gcnew System::Windows::Forms::ImageList(this->components));
             this->btnViewDetails = (gcnew System::Windows::Forms::Button());
             this->btnRefresh = (gcnew System::Windows::Forms::Button());
@@ -79,19 +81,20 @@ namespace UniProjectExchange {
             // 
             // lvProjects
             // 
-            this->lvProjects->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(4) {
-                this->colImage, this->colTitle,
-                    this->colPrice, this->colCategory
+            this->lvProjects->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(2) {
+               this->colTitle,
+                    this->colPrice
             });
+        
             this->lvProjects->FullRowSelect = true;
             this->lvProjects->GridLines = true;
             this->lvProjects->HideSelection = false;
-            this->lvProjects->LargeImageList = this->imageList1;
+           // this->lvProjects->LargeImageList = this->imageList1;
             this->lvProjects->Location = System::Drawing::Point(30, 62);
             this->lvProjects->MultiSelect = false;
             this->lvProjects->Name = L"lvProjects";
             this->lvProjects->Size = System::Drawing::Size(740, 368);
-            this->lvProjects->SmallImageList = this->imageList1;
+            //this->lvProjects->SmallImageList = this->imageList1;
             this->lvProjects->TabIndex = 1;
             this->lvProjects->UseCompatibleStateImageBehavior = false;
             this->lvProjects->View = System::Windows::Forms::View::Details;
@@ -100,8 +103,8 @@ namespace UniProjectExchange {
             // 
             // colImage
             // 
-            this->colImage->Text = L"Image";
-            this->colImage->Width = 150;
+            //this->colImage->Text = L"Image";
+            //this->colImage->Width = 150;
             // 
             // colTitle
             // 
@@ -112,11 +115,6 @@ namespace UniProjectExchange {
             // 
             this->colPrice->Text = L"Price";
             this->colPrice->Width = 100;
-            // 
-            // colCategory
-            // 
-            this->colCategory->Text = L"Category";
-            this->colCategory->Width = 150;
             // 
             // imageList1
             // 
@@ -197,66 +195,55 @@ namespace UniProjectExchange {
         }
 #pragma endregion
 
-    private: void LoadProjects() {
-        lvProjects->Items->Clear();
-        imageList1->Images->Clear(); // Clear previous images
+      private: void LoadProjects() {
+          lvProjects->Items->Clear();
 
-        SqlConnection^ connection = gcnew SqlConnection(connectionString);
-        SqlCommand^ command = gcnew SqlCommand("SELECT Id, Title, Price, Category, ImagePath FROM Projects", connection);
+          SqlConnection^ connection = gcnew SqlConnection(connectionString);
+          SqlCommand^ command = gcnew SqlCommand("SELECT ProjectId, Title, Price, ImagePath FROM Projects", connection);
 
-        try {
-            connection->Open();
-            SqlDataReader^ reader = command->ExecuteReader();
+          try {
+              connection->Open();
+              SqlDataReader^ reader = command->ExecuteReader();
 
-            int imageIndex = 0;
+              while (reader->Read()) {
+                  String^ id = reader["ProjectId"]->ToString();
+                  String^ title = reader["Title"]->ToString();
+                  String^ price = "$" + Convert::ToDouble(reader["Price"]).ToString("N2");
+                  String^ base64Image = reader["ImagePath"] != DBNull::Value ? reader["ImagePath"]->ToString() : "";
+                  Debug::WriteLine(base64Image->Substring(0, Math::Min(100, base64Image->Length)));
 
-            while (reader->Read()) {
-                String^ title = reader["Title"]->ToString();
-                String^ price = "$" + Convert::ToDouble(reader["Price"]).ToString("N2");
-                String^ category = reader["Category"]->ToString();
-                String^ imagePath = reader["ImagePath"] != DBNull::Value ? reader["ImagePath"]->ToString() : "";
+                  ListViewItem^ item = gcnew ListViewItem(title);
+                  item->SubItems->Add(price);
+                  item->Tag = id;
 
-                // Load image
-                Image^ image = nullptr;
-                if (!String::IsNullOrEmpty(imagePath) && File::Exists(imagePath)) {
-                    try {
-                        image = Image::FromFile(imagePath);
-                    }
-                    catch (...) {
-                        image = nullptr; // If image can't be loaded, skip
-                    }
-                }
+                  if (!String::IsNullOrEmpty(base64Image)) {
+                      try {
+                          array<Byte>^ imageBytes = Convert::FromBase64String(base64Image);
+                          MemoryStream^ ms = gcnew MemoryStream(imageBytes);
+                          Image^ img = Image::FromStream(ms);
+                          imageList1->Images->Add(img);
+                          item->ImageIndex = imageList1->Images->Count - 1;
+                      }
+                      catch (...) {
+                          item->ImageIndex = 0;
+                      }
+                  }
+                  else {
+                      item->ImageIndex = 0;
+                  }
 
-                if (image != nullptr) {
-                    imageList1->Images->Add(image);
-                }
-                else {
-                    // Add a default or empty image if none exists
-                    Bitmap^ placeholder = gcnew Bitmap(16, 16);
-                    Graphics^ g = Graphics::FromImage(placeholder);
-                    g->Clear(Color::Gray);
-                    imageList1->Images->Add(placeholder);
-                }
-
-                // Create ListViewItem with subitems
-                ListViewItem^ item = gcnew ListViewItem();
-                item->ImageIndex = imageIndex++;
-                item->SubItems->Add(title);
-                item->SubItems->Add(price);
-                item->SubItems->Add(category);
-
-                lvProjects->Items->Add(item);
-            }
-
-            reader->Close();
-        }
-        catch (Exception^ ex) {
-            MessageBox::Show("Error loading projects: " + ex->Message);
-        }
-        finally {
-            connection->Close();
-        }
-    }
+                  lvProjects->Items->Add(item);
+              }
+              reader->Close();
+          }
+          catch (Exception^ ex) {
+              MessageBox::Show("Error loading projects: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+          }
+          finally {
+              if (connection->State == ConnectionState::Open)
+                  connection->Close();
+          }
+      }
 
 
     private: System::Void ProjectSelected(System::Object^ sender, System::EventArgs^ e) {

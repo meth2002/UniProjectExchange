@@ -178,12 +178,12 @@ namespace UniProjectExchange {
 
 	private: void LoadUserData() {
 		lblWelcome->Text = "Welcome, " + GetCurrentUserName() + "!";
-		lblBalanceValue->Text = "$" + GetCurrentUserBalance().ToString("N2");
+		lblBalanceValue->Text = "Rs." + GetCurrentUserBalance().ToString("N2");
 	}
 
 	private: void RefreshDashboardData() {
 		// Refresh the data grid with current holdings
-		dataGridView1->DataSource = GetUserHoldings();
+		
 		dataGridView1->AutoResizeColumns();
 	}
 
@@ -198,22 +198,11 @@ namespace UniProjectExchange {
 		return 1000.00; // Replace with actual implementation
 	}
 
-	private: DataTable^ GetUserHoldings() {
-		// Create sample data - replace with actual database call
-		DataTable^ dt = gcnew DataTable();
-		dt->Columns->Add("Symbol");
-		dt->Columns->Add("Quantity");
-		dt->Columns->Add("Avg Price");
-		dt->Columns->Add("Current Price");
-		dt->Columns->Add("Value");
+	
+	
 
-		// Add sample rows
-		dt->Rows->Add("AAPL", 10, 150.25, 155.30, 1553.00);
-		dt->Rows->Add("MSFT", 5, 250.75, 245.50, 1227.50);
-		dt->Rows->Add("GOOGL", 2, 1250.00, 1275.25, 2550.50);
-
-		return dt;
-	}
+		
+	
 	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 	}
 private: System::Void lblBalanceValue_Click(System::Object^ sender, System::EventArgs^ e) {

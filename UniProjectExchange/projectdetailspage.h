@@ -1,5 +1,6 @@
 #pragma once
-
+# include "buypage.h"   
+#include "DatabaseConfig.h" 
 namespace UniProjectExchange {
 
     using namespace System;
@@ -17,7 +18,9 @@ namespace UniProjectExchange {
         ProjectDetailsForm(String^ projectId)
         {
             InitializeComponent();
-            connectionString = "Data Source=localhost\\sqlexpress;Initial Catalog=UniProjectExchange;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
+            pictureBox1->Image = nullptr;
+            pictureBox1->BackgroundImage = nullptr;
+            connectionString = DatabaseConfig::ConnectionString;
             this->projectId = projectId;
             LoadProjectDetails();
             LoadProjectComponents();
@@ -80,6 +83,8 @@ namespace UniProjectExchange {
             this->lblTitle->Size = System::Drawing::Size(66, 29);
             this->lblTitle->TabIndex = 0;
             this->lblTitle->Text = L"Title";
+
+
             // 
             // picProjectImage
             // 
@@ -184,7 +189,7 @@ namespace UniProjectExchange {
             // 
             // pictureBox1
             // 
-            this->pictureBox1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.BackgroundImage")));
+            //this->pictureBox1->BackgroundImage = 
             this->pictureBox1->Location = System::Drawing::Point(82, 90);
             this->pictureBox1->Name = L"pictureBox1";
             this->pictureBox1->Size = System::Drawing::Size(372, 400);
@@ -221,7 +226,7 @@ namespace UniProjectExchange {
 
     private: void LoadProjectDetails() {
         SqlConnection^ connection = gcnew SqlConnection(connectionString);
-        SqlCommand^ command = gcnew SqlCommand("SELECT Title, Description, Price, Category, ImagePath FROM Projects WHERE Id = @Id", connection);
+        SqlCommand^ command = gcnew SqlCommand("SELECT Title, Description, Price, ImagePath FROM Projects WHERE ProjectId = @Id", connection);
         command->Parameters->AddWithValue("@Id", projectId);
 
         try {
@@ -233,13 +238,23 @@ namespace UniProjectExchange {
                 txtDescription->Text = reader["Description"]->ToString();
                 projectPrice = Convert::ToDouble(reader["Price"]);
                 lblPriceValue->Text = "Rs." + projectPrice.ToString("N2");
-                lblCategoryValue->Text = reader["Category"]->ToString();
+                
 
                 // Load image if available
                 if (reader["ImagePath"] != DBNull::Value) {
                     String^ imagePath = reader["ImagePath"]->ToString();
-                    if (File::Exists(imagePath)) {
-                        picProjectImage->Image = Image::FromFile(imagePath);
+                    if (!String::IsNullOrEmpty(imagePath)) {
+                        String^ base64Image = reader["ImagePath"]->ToString();
+                        try {
+                            array<Byte>^ imageBytes = Convert::FromBase64String(base64Image);
+                            MemoryStream^ ms = gcnew MemoryStream(imageBytes);
+                            Image^ img = Image::FromStream(ms);
+                            picProjectImage->Image = img;
+                        }
+                        catch (Exception^ exImg) {
+                            MessageBox::Show("Failed to load image: " + exImg->Message);
+                            picProjectImage->Image = nullptr;
+                        }
                     }
                 }
             }
@@ -293,16 +308,14 @@ namespace UniProjectExchange {
         if (MessageBox::Show("Are you sure you want to purchase this project for " + lblPriceValue->Text + "?",
             "Confirm Purchase", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::Yes) {
 
-            if (ProcessPurchase()) {
+           
                 MessageBox::Show("Purchase completed successfully!", "Success",
                     MessageBoxButtons::OK, MessageBoxIcon::Information);
                 this->DialogResult = System::Windows::Forms::DialogResult::OK;
+			
                 this->Close();
-            }
-            else {
-                MessageBox::Show("Purchase failed. Please try again.", "Error",
-                    MessageBoxButtons::OK, MessageBoxIcon::Error);
-            }
+				
+            
         }
     }
 
@@ -365,24 +378,9 @@ namespace UniProjectExchange {
     }
 
     private: double GetUserBalance() {
-        // Implement to get the actual user's balance from database
-        SqlConnection^ connection = gcnew SqlConnection(connectionString);
-        SqlCommand^ command = gcnew SqlCommand("SELECT Balance FROM Users WHERE Id = @UserId", connection);
-        command->Parameters->AddWithValue("@UserId", GetCurrentUserId());
-
-        try {
-            connection->Open();
-            Object^ result = command->ExecuteScalar();
-            return result != DBNull::Value ? Convert::ToDouble(result) : 0.0;
-        }
-        catch (Exception^ ex) {
-            return 0.0;
-        }
-        finally {
-            if (connection->State == ConnectionState::Open)
-                connection->Close();
-        }
+        return 1000000.00;
     }
+    
 
     private: int GetCurrentUserId() {
         // Implement to get the actual logged-in user ID
