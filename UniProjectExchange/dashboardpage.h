@@ -1,7 +1,7 @@
 #pragma once
 #include "browserpage.h"
 #include "sellpage1.h"
-#include "browserpage.h"
+
 
 namespace UniProjectExchange {
 
@@ -33,9 +33,7 @@ namespace UniProjectExchange {
 	private: System::Windows::Forms::Button^ btnBuy;
 	private: System::Windows::Forms::Button^ btnSell;
 	private: System::Windows::Forms::Button^ btnLogout;
-	private: System::Windows::Forms::Label^ lblBalance;
-	private: System::Windows::Forms::Label^ lblBalanceValue;
-	private: System::Windows::Forms::DataGridView^ dataGridView1;
+
 
 
 
@@ -50,8 +48,7 @@ namespace UniProjectExchange {
 			this->btnBuy = (gcnew System::Windows::Forms::Button());
 			this->btnSell = (gcnew System::Windows::Forms::Button());
 			this->btnLogout = (gcnew System::Windows::Forms::Button());
-			this->lblBalance = (gcnew System::Windows::Forms::Label());
-			this->lblBalanceValue = (gcnew System::Windows::Forms::Label());
+
 			this->SuspendLayout();
 			// 
 			// lblWelcome
@@ -76,7 +73,7 @@ namespace UniProjectExchange {
 			this->btnBuy->Name = L"btnBuy";
 			this->btnBuy->Size = System::Drawing::Size(150, 50);
 			this->btnBuy->TabIndex = 1;
-			this->btnBuy->Text = L"BUY";
+			this->btnBuy->Text = L"BUYER";
 			this->btnBuy->UseVisualStyleBackColor = false;
 			this->btnBuy->Click += gcnew System::EventHandler(this, &dashboard::BuyButton_Click);
 			// 
@@ -91,7 +88,7 @@ namespace UniProjectExchange {
 			this->btnSell->Name = L"btnSell";
 			this->btnSell->Size = System::Drawing::Size(150, 50);
 			this->btnSell->TabIndex = 2;
-			this->btnSell->Text = L"SELL";
+			this->btnSell->Text = L"SELLER";
 			this->btnSell->UseVisualStyleBackColor = false;
 			this->btnSell->Click += gcnew System::EventHandler(this, &dashboard::SellButton_Click);
 			// 
@@ -106,44 +103,22 @@ namespace UniProjectExchange {
 			this->btnLogout->Text = L"Logout";
 			this->btnLogout->UseVisualStyleBackColor = true;
 			this->btnLogout->Click += gcnew System::EventHandler(this, &dashboard::LogoutButton_Click);
-			// 
-			// lblBalance
-			// 
-			this->lblBalance->AutoSize = true;
-			this->lblBalance->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->lblBalance->Location = System::Drawing::Point(450, 100);
-			this->lblBalance->Name = L"lblBalance";
-			this->lblBalance->Size = System::Drawing::Size(75, 20);
-			this->lblBalance->TabIndex = 4;
-			this->lblBalance->Text = L"Balance:";
-			// 
+
 			// lblBalanceValue
-			// 
-			this->lblBalanceValue->AutoSize = true;
-			this->lblBalanceValue->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->lblBalanceValue->Location = System::Drawing::Point(450, 130);
-			this->lblBalanceValue->Name = L"lblBalanceValue";
-			this->lblBalanceValue->Size = System::Drawing::Size(72, 20);
-			this->lblBalanceValue->TabIndex = 5;
-			this->lblBalanceValue->Text = L"Rs.0.00";
-			this->lblBalanceValue->Click += gcnew System::EventHandler(this, &dashboard::lblBalanceValue_Click);
-			// 
+
 			// dashboard
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(750, 450);
-			this->Controls->Add(this->lblBalanceValue);
-			this->Controls->Add(this->lblBalance);
+
 			this->Controls->Add(this->btnLogout);
 			this->Controls->Add(this->btnSell);
 			this->Controls->Add(this->btnBuy);
 			this->Controls->Add(this->lblWelcome);
 			this->Name = L"dashboard";
 			this->Text = L"Dashboard";
-			this->Load += gcnew System::EventHandler(this, &dashboard::Dashboard_Load);
+		
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -171,41 +146,15 @@ namespace UniProjectExchange {
 		this->Close();
 	}
 
-	private: System::Void Dashboard_Load(System::Object^ sender, System::EventArgs^ e) {
-		LoadUserData();
-		//RefreshDashboardData();
-	}
-
-	private: void LoadUserData() {
-		lblWelcome->Text = "Welcome, " + GetCurrentUserName() + "!";
-		lblBalanceValue->Text = "Rs." + GetCurrentUserBalance().ToString("N2");
-	}
-
-	private: void RefreshDashboardData() {
-		// Refresh the data grid with current holdings
-		
-		dataGridView1->AutoResizeColumns();
-	}
-
-		   // These methods would be implemented to get actual data from your database
-	private: String^ GetCurrentUserName() {
-		// Implement database lookup for current user's name
-		return "User"; // Replace with actual implementation
-	}
-
-	private: double GetCurrentUserBalance() {
-		// Implement database lookup for current user's balance
-		return 1000.00; // Replace with actual implementation
-	}
+	
 
 	
 	
 
-		
+
+
+
+
 	
-	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-	}
-private: System::Void lblBalanceValue_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-};
+	};
 }

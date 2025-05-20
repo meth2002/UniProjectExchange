@@ -44,6 +44,7 @@ namespace UniProjectExchange {
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
+			
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -53,9 +54,9 @@ namespace UniProjectExchange {
 			this->btnRegister = (gcnew System::Windows::Forms::Button());
 			this->btnBack = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
-			// 
-			// label1
-			// 
+			
+			// email label
+
 			this->label1->AutoSize = true;
 			this->label1->Location = System::Drawing::Point(187, 80);
 			this->label1->Name = L"label1";
@@ -63,51 +64,51 @@ namespace UniProjectExchange {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Email";
 			this->label1->Click += gcnew System::EventHandler(this, &registerpage::label1_Click);
-			// 
-			// label2
-			// 
+			
+			// Password label
+			
 			this->label2->AutoSize = true;
 			this->label2->Location = System::Drawing::Point(187, 130);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(67, 16);
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"Password";
-			// 
-			// label3
-			// 
+			
+			// confirm password label
+			
 			this->label3->AutoSize = true;
 			this->label3->Location = System::Drawing::Point(187, 180);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(115, 16);
 			this->label3->TabIndex = 2;
 			this->label3->Text = L"Confirm Password";
-			// 
-			// txtEmail
-			// 
+			
+			// text box for email
+			
 			this->txtEmail->Location = System::Drawing::Point(305, 77);
 			this->txtEmail->Name = L"txtEmail";
 			this->txtEmail->Size = System::Drawing::Size(200, 22);
 			this->txtEmail->TabIndex = 3;
 			this->txtEmail->TextChanged += gcnew System::EventHandler(this, &registerpage::txtEmail_TextChanged);
-			// 
-			// txtPassword
-			// 
+			 
+			// text box for password
+			
 			this->txtPassword->Location = System::Drawing::Point(305, 127);
 			this->txtPassword->Name = L"txtPassword";
 			this->txtPassword->PasswordChar = '*';
 			this->txtPassword->Size = System::Drawing::Size(200, 22);
 			this->txtPassword->TabIndex = 4;
-			// 
-			// txtConfirmPassword
-			// 
+			
+			// text box for ConfirmPassword
+			 
 			this->txtConfirmPassword->Location = System::Drawing::Point(305, 177);
 			this->txtConfirmPassword->Name = L"txtConfirmPassword";
 			this->txtConfirmPassword->PasswordChar = '*';
 			this->txtConfirmPassword->Size = System::Drawing::Size(200, 22);
 			this->txtConfirmPassword->TabIndex = 5;
-			// 
-			// btnRegister
-			// 
+			 
+			// register button
+			
 			this->btnRegister->Location = System::Drawing::Point(184, 250);
 			this->btnRegister->Name = L"btnRegister";
 			this->btnRegister->Size = System::Drawing::Size(100, 30);
@@ -115,9 +116,9 @@ namespace UniProjectExchange {
 			this->btnRegister->Text = L"Register";
 			this->btnRegister->UseVisualStyleBackColor = true;
 			this->btnRegister->Click += gcnew System::EventHandler(this, &registerpage::RegisterButton_Click);
-			// 
-			// btnBack
-			// 
+			 
+			// back button
+			
 			this->btnBack->Location = System::Drawing::Point(405, 250);
 			this->btnBack->Name = L"btnBack";
 			this->btnBack->Size = System::Drawing::Size(100, 30);
@@ -125,9 +126,9 @@ namespace UniProjectExchange {
 			this->btnBack->Text = L"Back";
 			this->btnBack->UseVisualStyleBackColor = true;
 			this->btnBack->Click += gcnew System::EventHandler(this, &registerpage::BackButton_Click);
-			// 
-			// registerpage
-			// 
+			
+			//  about register page
+			
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(737, 385);

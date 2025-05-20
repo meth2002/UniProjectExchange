@@ -40,10 +40,9 @@ namespace UniProjectExchange {
     
     private: System::Windows::Forms::ImageList^ imageList1;
     private: System::Windows::Forms::Button^ btnViewDetails;
-    private: System::Windows::Forms::Button^ btnRefresh;
-    private: System::Windows::Forms::ComboBox^ cmbFilter;
-    private: System::Windows::Forms::Label^ lblFilter;
-    private: System::Windows::Forms::Button^ btnApplyFilter;
+    
+    
+   
     private: String^ connectionString;
     private: System::ComponentModel::IContainer^ components;
 
@@ -62,14 +61,11 @@ namespace UniProjectExchange {
            
             this->imageList1 = (gcnew System::Windows::Forms::ImageList(this->components));
             this->btnViewDetails = (gcnew System::Windows::Forms::Button());
-            this->btnRefresh = (gcnew System::Windows::Forms::Button());
-            this->cmbFilter = (gcnew System::Windows::Forms::ComboBox());
-            this->lblFilter = (gcnew System::Windows::Forms::Label());
-            this->btnApplyFilter = (gcnew System::Windows::Forms::Button());
+           
             this->SuspendLayout();
-            // 
+             
             // lblTitle
-            // 
+            
             this->lblTitle->AutoSize = true;
             this->lblTitle->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
@@ -78,9 +74,9 @@ namespace UniProjectExchange {
             this->lblTitle->Size = System::Drawing::Size(204, 29);
             this->lblTitle->TabIndex = 0;
             this->lblTitle->Text = L"Browse Projects";
-            // 
-            // lvProjects
-            // 
+             
+            // table Projects
+            
             this->lvProjects->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(2) {
                this->colTitle,
                     this->colPrice
@@ -100,30 +96,20 @@ namespace UniProjectExchange {
             this->lvProjects->View = System::Windows::Forms::View::Details;
             this->lvProjects->SelectedIndexChanged += gcnew System::EventHandler(this, &BrowseProjectsForm::ProjectSelected);
             this->lvProjects->DoubleClick += gcnew System::EventHandler(this, &BrowseProjectsForm::ProjectDoubleClick);
-            // 
-            // colImage
-            // 
-            //this->colImage->Text = L"Image";
-            //this->colImage->Width = 150;
-            // 
-            // colTitle
-            // 
+             
+            
+            // column Title
+            
             this->colTitle->Text = L"Title";
             this->colTitle->Width = 250;
-            // 
-            // colPrice
-            // 
+            
+            // column Price
+            
             this->colPrice->Text = L"Price";
             this->colPrice->Width = 100;
-            // 
-            // imageList1
-            // 
-            this->imageList1->ColorDepth = System::Windows::Forms::ColorDepth::Depth8Bit;
-            this->imageList1->ImageSize = System::Drawing::Size(64, 64);
-            this->imageList1->TransparentColor = System::Drawing::Color::Transparent;
-            // 
-            // btnViewDetails
-            // 
+            
+            // button ViewDetails
+            
             this->btnViewDetails->Location = System::Drawing::Point(30, 450);
             this->btnViewDetails->Name = L"btnViewDetails";
             this->btnViewDetails->Size = System::Drawing::Size(150, 40);
@@ -131,58 +117,17 @@ namespace UniProjectExchange {
             this->btnViewDetails->Text = L"View Details";
             this->btnViewDetails->UseVisualStyleBackColor = true;
             this->btnViewDetails->Click += gcnew System::EventHandler(this, &BrowseProjectsForm::ViewDetails_Click);
-            // 
-            // btnRefresh
-            // 
-            this->btnRefresh->Location = System::Drawing::Point(620, 450);
-            this->btnRefresh->Name = L"btnRefresh";
-            this->btnRefresh->Size = System::Drawing::Size(150, 40);
-            this->btnRefresh->TabIndex = 3;
-            this->btnRefresh->Text = L"Refresh";
-            this->btnRefresh->UseVisualStyleBackColor = true;
-            this->btnRefresh->Click += gcnew System::EventHandler(this, &BrowseProjectsForm::Refresh_Click);
-            // 
-            // cmbFilter
-            // 
-            this->cmbFilter->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-            this->cmbFilter->FormattingEnabled = true;
-            this->cmbFilter->Items->AddRange(gcnew cli::array< System::Object^  >(6) {
-                L"All Categories", L"Software", L"Hardware", L"Research",
-                    L"Design", L"Other"
-            });
-            this->cmbFilter->Location = System::Drawing::Point(500, 30);
-            this->cmbFilter->Name = L"cmbFilter";
-            this->cmbFilter->Size = System::Drawing::Size(150, 24);
-            this->cmbFilter->TabIndex = 4;
-            // 
-            // lblFilter
-            // 
-            this->lblFilter->AutoSize = true;
-            this->lblFilter->Location = System::Drawing::Point(450, 33);
-            this->lblFilter->Name = L"lblFilter";
-            this->lblFilter->Size = System::Drawing::Size(39, 16);
-            this->lblFilter->TabIndex = 5;
-            this->lblFilter->Text = L"Filter:";
-            // 
-            // btnApplyFilter
-            // 
-            this->btnApplyFilter->Location = System::Drawing::Point(660, 30);
-            this->btnApplyFilter->Name = L"btnApplyFilter";
-            this->btnApplyFilter->Size = System::Drawing::Size(110, 25);
-            this->btnApplyFilter->TabIndex = 6;
-            this->btnApplyFilter->Text = L"Apply Filter";
-            this->btnApplyFilter->UseVisualStyleBackColor = true;
-            this->btnApplyFilter->Click += gcnew System::EventHandler(this, &BrowseProjectsForm::ApplyFilter_Click);
-            // 
+            
+          
+            
+            
+           
             // BrowseProjectsForm
-            // 
+            
             this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
             this->ClientSize = System::Drawing::Size(800, 500);
-            this->Controls->Add(this->btnApplyFilter);
-            this->Controls->Add(this->lblFilter);
-            this->Controls->Add(this->cmbFilter);
-            this->Controls->Add(this->btnRefresh);
+           
             this->Controls->Add(this->btnViewDetails);
             this->Controls->Add(this->lvProjects);
             this->Controls->Add(this->lblTitle);
@@ -199,7 +144,7 @@ namespace UniProjectExchange {
           lvProjects->Items->Clear();
 
           SqlConnection^ connection = gcnew SqlConnection(connectionString);
-          SqlCommand^ command = gcnew SqlCommand("SELECT ProjectId, Title, Price, ImagePath FROM Projects", connection);
+          SqlCommand^ command = gcnew SqlCommand("SELECT ProjectId, Title, Price FROM Projects", connection);
 
           try {
               connection->Open();
@@ -208,29 +153,13 @@ namespace UniProjectExchange {
               while (reader->Read()) {
                   String^ id = reader["ProjectId"]->ToString();
                   String^ title = reader["Title"]->ToString();
-                  String^ price = "$" + Convert::ToDouble(reader["Price"]).ToString("N2");
-                  String^ base64Image = reader["ImagePath"] != DBNull::Value ? reader["ImagePath"]->ToString() : "";
-                  Debug::WriteLine(base64Image->Substring(0, Math::Min(100, base64Image->Length)));
-
+                  String^ price = "Rs." + Convert::ToDouble(reader["Price"]).ToString("N2");
+                 
                   ListViewItem^ item = gcnew ListViewItem(title);
                   item->SubItems->Add(price);
                   item->Tag = id;
 
-                  if (!String::IsNullOrEmpty(base64Image)) {
-                      try {
-                          array<Byte>^ imageBytes = Convert::FromBase64String(base64Image);
-                          MemoryStream^ ms = gcnew MemoryStream(imageBytes);
-                          Image^ img = Image::FromStream(ms);
-                          imageList1->Images->Add(img);
-                          item->ImageIndex = imageList1->Images->Count - 1;
-                      }
-                      catch (...) {
-                          item->ImageIndex = 0;
-                      }
-                  }
-                  else {
-                      item->ImageIndex = 0;
-                  }
+             
 
                   lvProjects->Items->Add(item);
               }
@@ -265,20 +194,13 @@ namespace UniProjectExchange {
             String^ projectId = lvProjects->SelectedItems[0]->Tag->ToString();
             ProjectDetailsForm^ detailsForm = gcnew ProjectDetailsForm(projectId);
             if (detailsForm->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-                // Refresh if purchase was made
+                
                 LoadProjects();
             }
         }
     }
 
-    private: System::Void Refresh_Click(System::Object^ sender, System::EventArgs^ e) {
-        LoadProjects();
-    }
-
-    private: System::Void ApplyFilter_Click(System::Object^ sender, System::EventArgs^ e) {
-        String^ filter = cmbFilter->SelectedItem != nullptr ? cmbFilter->SelectedItem->ToString() : "All Categories";
-
-    }
+    
     private: System::Void BrowseProjectsForm_Load(System::Object^ sender, System::EventArgs^ e) {
     }
 };

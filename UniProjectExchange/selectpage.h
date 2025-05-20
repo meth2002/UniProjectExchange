@@ -11,24 +11,18 @@ namespace UniProjectExchange {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Summary for selectpage
-	/// </summary>
+	// class select page
 	public ref class selectpage : public System::Windows::Forms::Form
 	{
 	public:
 		selectpage(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+			
 		}
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
+		
 		~selectpage()
 		{
 			if (components)
@@ -41,24 +35,19 @@ namespace UniProjectExchange {
 	private: System::Windows::Forms::Button^ button2;
 
 	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
+		
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
+		
 		void InitializeComponent(void)
 		{
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
-			// 
-			// button1
-			// 
+			 
+			// login button  
+			
 			this->button1->Location = System::Drawing::Point(77, 97);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(167, 66);
@@ -66,9 +55,9 @@ namespace UniProjectExchange {
 			this->button1->Text = L"Login";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &selectpage::button1_Click);
-			// 
-			// button2
-			// 
+			
+			// Register button
+			
 			this->button2->Location = System::Drawing::Point(444, 97);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(150, 66);
@@ -76,9 +65,9 @@ namespace UniProjectExchange {
 			this->button2->Text = L"Register";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &selectpage::button2_Click);
-			// 
-			// selectpage
-			// 
+			
+			//about select page
+			
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(707, 347);

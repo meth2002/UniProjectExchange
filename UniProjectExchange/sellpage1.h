@@ -40,8 +40,6 @@ namespace UniProjectExchange {
     private: System::Windows::Forms::Button^ btnRemoveComponent;
     private: System::Windows::Forms::Label^ lblPrice;
     private: System::Windows::Forms::TextBox^ txtPrice;
-
-
     private: System::Windows::Forms::Label^ lblImage;
     private: System::Windows::Forms::PictureBox^ picProjectImage;
     private: System::Windows::Forms::Button^ btnUploadImage;
@@ -75,9 +73,9 @@ namespace UniProjectExchange {
             (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvComponents))->BeginInit();
             (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picProjectImage))->BeginInit();
             this->SuspendLayout();
-            // 
-            // lblTitle
-            // 
+             
+            // label Title
+            
             this->lblTitle->AutoSize = true;
             this->lblTitle->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
@@ -86,16 +84,16 @@ namespace UniProjectExchange {
             this->lblTitle->Size = System::Drawing::Size(118, 20);
             this->lblTitle->TabIndex = 0;
             this->lblTitle->Text = L"Project Title:";
-            // 
-            // txtProjectTitle
-            // 
+            
+            // text project title
+             
             this->txtProjectTitle->Location = System::Drawing::Point(150, 30);
             this->txtProjectTitle->Name = L"txtProjectTitle";
             this->txtProjectTitle->Size = System::Drawing::Size(300, 22);
             this->txtProjectTitle->TabIndex = 1;
-            // 
-            // lblDescription
-            // 
+             
+            // label Description
+            
             this->lblDescription->AutoSize = true;
             this->lblDescription->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
@@ -104,17 +102,17 @@ namespace UniProjectExchange {
             this->lblDescription->Size = System::Drawing::Size(112, 20);
             this->lblDescription->TabIndex = 2;
             this->lblDescription->Text = L"Description:";
-            // 
-            // txtDescription
-            // 
+            
+            // text Description
+            
             this->txtDescription->Location = System::Drawing::Point(150, 70);
             this->txtDescription->Name = L"txtDescription";
             this->txtDescription->Size = System::Drawing::Size(300, 100);
             this->txtDescription->TabIndex = 3;
             this->txtDescription->Text = L"";
-            // 
-            // lblComponents
-            // 
+             
+            // label Components
+            
             this->lblComponents->AutoSize = true;
             this->lblComponents->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
@@ -123,9 +121,9 @@ namespace UniProjectExchange {
             this->lblComponents->Size = System::Drawing::Size(119, 20);
             this->lblComponents->TabIndex = 4;
             this->lblComponents->Text = L"Components:";
-            // 
-            // dgvComponents
-            // 
+             
+            // data grid view (table) for Components
+            
             this->dgvComponents->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
             this->dgvComponents->Location = System::Drawing::Point(150, 190);
             this->dgvComponents->Name = L"dgvComponents";
@@ -133,9 +131,9 @@ namespace UniProjectExchange {
             this->dgvComponents->RowTemplate->Height = 24;
             this->dgvComponents->Size = System::Drawing::Size(300, 150);
             this->dgvComponents->TabIndex = 5;
-            // 
-            // btnAddComponent
-            // 
+            
+            // button AddComponent
+            
             this->btnAddComponent->Location = System::Drawing::Point(150, 350);
             this->btnAddComponent->Name = L"btnAddComponent";
             this->btnAddComponent->Size = System::Drawing::Size(100, 30);
@@ -143,9 +141,9 @@ namespace UniProjectExchange {
             this->btnAddComponent->Text = L"Add Component";
             this->btnAddComponent->UseVisualStyleBackColor = true;
             this->btnAddComponent->Click += gcnew System::EventHandler(this, &SellProjectForm::AddComponent_Click);
-            // 
-            // btnRemoveComponent
-            // 
+            
+            // button RemoveComponent
+            
             this->btnRemoveComponent->Location = System::Drawing::Point(260, 350);
             this->btnRemoveComponent->Name = L"btnRemoveComponent";
             this->btnRemoveComponent->Size = System::Drawing::Size(100, 30);
@@ -153,9 +151,9 @@ namespace UniProjectExchange {
             this->btnRemoveComponent->Text = L"Remove";
             this->btnRemoveComponent->UseVisualStyleBackColor = true;
             this->btnRemoveComponent->Click += gcnew System::EventHandler(this, &SellProjectForm::RemoveComponent_Click);
-            // 
-            // lblPrice
-            // 
+             
+            // label Price
+            
             this->lblPrice->AutoSize = true;
             this->lblPrice->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
@@ -165,16 +163,16 @@ namespace UniProjectExchange {
             this->lblPrice->TabIndex = 8;
             this->lblPrice->Text = L"Price:";
             this->lblPrice->Click += gcnew System::EventHandler(this, &SellProjectForm::lblPrice_Click);
-            // 
-            // txtPrice
-            // 
+             
+            // text Price
+            
             this->txtPrice->Location = System::Drawing::Point(150, 418);
             this->txtPrice->Name = L"txtPrice";
             this->txtPrice->Size = System::Drawing::Size(150, 22);
             this->txtPrice->TabIndex = 9;
-            // 
-            // lblImage
-            // 
+            
+            // label Image
+            
             this->lblImage->AutoSize = true;
             this->lblImage->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
@@ -183,9 +181,9 @@ namespace UniProjectExchange {
             this->lblImage->Size = System::Drawing::Size(65, 20);
             this->lblImage->TabIndex = 12;
             this->lblImage->Text = L"Image:";
-            // 
-            // picProjectImage
-            // 
+            
+            // picture box ProjectImage
+            
             this->picProjectImage->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
             this->picProjectImage->Location = System::Drawing::Point(500, 60);
             this->picProjectImage->Name = L"picProjectImage";
@@ -193,9 +191,9 @@ namespace UniProjectExchange {
             this->picProjectImage->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
             this->picProjectImage->TabIndex = 13;
             this->picProjectImage->TabStop = false;
-            // 
-            // btnUploadImage
-            // 
+            
+            // button UploadImage
+            
             this->btnUploadImage->Location = System::Drawing::Point(500, 270);
             this->btnUploadImage->Name = L"btnUploadImage";
             this->btnUploadImage->Size = System::Drawing::Size(120, 30);
@@ -203,9 +201,9 @@ namespace UniProjectExchange {
             this->btnUploadImage->Text = L"Upload Image";
             this->btnUploadImage->UseVisualStyleBackColor = true;
             this->btnUploadImage->Click += gcnew System::EventHandler(this, &SellProjectForm::UploadImage_Click);
-            // 
-            // btnSubmit
-            // 
+             
+            // button Submit
+            
             this->btnSubmit->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(192)),
                 static_cast<System::Int32>(static_cast<System::Byte>(0)));
             this->btnSubmit->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
@@ -218,9 +216,9 @@ namespace UniProjectExchange {
             this->btnSubmit->Text = L"Submit";
             this->btnSubmit->UseVisualStyleBackColor = false;
             this->btnSubmit->Click += gcnew System::EventHandler(this, &SellProjectForm::Submit_Click);
-            // 
-            // btnCancel
-            // 
+             
+            // button Cancel
+            
             this->btnCancel->Location = System::Drawing::Point(630, 400);
             this->btnCancel->Name = L"btnCancel";
             this->btnCancel->Size = System::Drawing::Size(120, 40);
@@ -228,9 +226,9 @@ namespace UniProjectExchange {
             this->btnCancel->Text = L"Cancel";
             this->btnCancel->UseVisualStyleBackColor = true;
             this->btnCancel->Click += gcnew System::EventHandler(this, &SellProjectForm::Cancel_Click);
-            // 
-            // SellProjectForm
-            // 
+            
+            // about Sell ProjectForm
+            
             this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
             this->BackColor = System::Drawing::SystemColors::ActiveCaption;
@@ -316,10 +314,6 @@ namespace UniProjectExchange {
             return;
         }
 
-        //if (cmbCategory->SelectedIndex == -1) {
-        //    MessageBox::Show("Please select a category", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-        //    return;
-        //}
 
         // Save project to database
         if (SaveProjectToDatabase()) {
@@ -338,8 +332,7 @@ namespace UniProjectExchange {
 
         try {
             connection->Open();
-            SqlTransaction^ transaction = connection->BeginTransaction();
-            command->Transaction = transaction;
+          
 
             try {
                 // 1. Save the main project
@@ -348,8 +341,7 @@ namespace UniProjectExchange {
                 command->Parameters->AddWithValue("@Title", txtProjectTitle->Text);
                 command->Parameters->AddWithValue("@Description", txtDescription->Text);
                 command->Parameters->AddWithValue("@Price", txtPrice->Text);
-                //command->Parameters->AddWithValue("@Category", cmbCategory->SelectedItem->ToString());
-               // command->Parameters->AddWithValue("@SellerId", GetCurrentUserId()); 
+               
                 command->Parameters->AddWithValue("@ImagePath", base64Image != nullptr ? base64Image : static_cast<Object^>(DBNull::Value));
 
 
@@ -367,11 +359,10 @@ namespace UniProjectExchange {
                     command->ExecuteNonQuery();
                 }
 
-                transaction->Commit();
-                return true;
+                
             }
             catch (Exception^ ex) {
-                transaction->Rollback();
+               
                 return false;
             }
         }
@@ -385,8 +376,8 @@ namespace UniProjectExchange {
     }
 
     private: int GetCurrentUserId() {
-        // Implement to get the actual logged-in user ID
-        return 1; // Placeholder
+        
+        return 1; 
     }
 
     private: System::Void Cancel_Click(System::Object^ sender, System::EventArgs^ e) {
